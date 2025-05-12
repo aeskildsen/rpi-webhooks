@@ -7,8 +7,9 @@ fi
 
 systemctl stop webhooks.service
 systemctl disable webhooks.service
+rm -f /etc/systemd/system/webhooks.service
+systemctl daemon-reload
 
 rm -rf /opt/rpi-webhooks
 rm -rf /etc/opt/rpi-webhooks
-rm -f /etc/systemd/system/webhooks.service
 rm -f /var/log/rpi-webhooks-install.log

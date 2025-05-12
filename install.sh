@@ -38,6 +38,7 @@ cp ./webhooks.service /etc/systemd/system/webhooks.service >> "$LOGFILE" 2>&1
 
 # Enable and start the API as a systemd service
 echo 'Enabling and starting the API as a systemd service...'
+systemctl daemon-reload >> "$LOGFILE" 2>&1
 systemctl enable webhooks.service >> "$LOGFILE" 2>&1 && systemctl start webhooks.service >> "$LOGFILE" 2>&1
 
 if [ $? -ne 0 ]; then
