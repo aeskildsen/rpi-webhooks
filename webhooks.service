@@ -1,0 +1,14 @@
+[Unit]
+Description=Webhooks Service
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/python3 /opt/rpi-webhooks/api.py
+WorkingDirectory=/opt/rpi-webhooks
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=root
+
+[Install]
+WantedBy=multi-user.target

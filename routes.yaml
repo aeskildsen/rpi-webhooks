@@ -1,0 +1,7 @@
+routes:
+  /shutdown:
+    command: "sudo shutdown -h now"
+    response_message: "Shutting down..."
+  /reboot:
+    command: "sudo reboot now"
+    response_message: "Rebooting..."
