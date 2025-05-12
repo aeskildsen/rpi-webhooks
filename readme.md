@@ -2,7 +2,7 @@
 
 A very simple Flask-based API that allows the user to execute commands and scripts on a Raspberry Pi (or other Linux box) by making a web request to the device.
 
-**This project was developed as a small utility for easily executing scripts on headless Raspberry Pi computers and has not been tested extensively. Use at your own risk!**
+**This project was developed as a small utility for easily executing commands like reboot and shutdown on headless Raspberry Pi computers. It has not been tested extensively. Allowing network users to execute commands on a computer obviously represents a security concern. To sum up: Use this at your own risk!**
 
 ## First setup
 
@@ -18,7 +18,7 @@ To install, download this repository on the Pi and run `install.sh` with `sudo`.
 
 The API should now be running and working after reboots as well.
 
-### Firewall
+### Firewall configuration
 
 If you have a firewall running on the Pi, allow incoming traffic on port 5000.
 
@@ -39,21 +39,30 @@ Two commands are enabled by default: `/shutdown` and `/reboot`.
 routes:
   /shutdown:
     command: "sudo shutdown -h now"
-    response_message: "Shutting down..."
+    response_message: "Shutting down."
   /reboot:
     command: "sudo reboot now"
-    response_message: "Rebooting..."
+    response_message: "Rebooting."
 ```
 
 ### Custom commands
 
 To define your own commands, modify `/etc/opt/rpi-webhooks/routes.yaml`, following the examples above. Note that commands must begin with a `/`, and the fields `command` and ``response_message` are both mandatory.
 
-After editing `routes.yaml`, run `sudo systemctl restart webhooks.service` to let the Flask application pick up the new routes.
+```yaml title="/etc/opt/rpi-webhooks/routes.yaml"
+routes:
+  /my-script:
+    command: "/home/pi/my-script.sh"
+    response_message: "Running a cool script."
+```
+
+After editing `routes.yaml`, run `sudo systemctl restart webhooks.service` to let the Flask application pick up the changes.
 
 ## Management
 
-The API can be managed with the usual tools for controlling services with systemd, i.e. `sudo systemctl stop webhooks.service` to stop the API etc. For debugging, logs can be studied with `journalctl --unit=webhooks.service`'
+The API can be managed with the usual tools for [managing services with systemd](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/7/html/system_administrators_guide/chap-managing_services_with_systemd#sect-Managing_Services_with_systemd-Services), i.e. `sudo systemctl stop webhooks.service` to stop the API, etc.
+
+For debugging, logs can be studied with `journalctl --unit=webhooks.service`.
 
 ## Uninstalling
 
