@@ -2,7 +2,7 @@
 
 A very simple Flask-based API that allows the user to execute commands and scripts on a Raspberry Pi (or other Linux box) by making a web request to the device.
 
-**Warning: This project was developed as a small utility for easily executing commands like reboot and shutdown on headless Raspberry Pi computers. It has not been tested extensively. Allowing network users to execute commands on a computer obviously represents a security concern. To sum up: Use this at your own risk!**
+**Warning: This project was developed as a small utility for easily executing commands like reboot and shutdown on headless Raspberry Pi computers. It has not been tested extensively. Allowing network users to execute commands on a computer obviously represents a security concern. To sum up: Check out the code and use at your own risk!**
 
 ## First setup
 
